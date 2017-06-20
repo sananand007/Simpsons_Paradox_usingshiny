@@ -1,0 +1,47 @@
+---
+title: "Explain Simpson's Paradox"
+author: "Sandeep Anand"
+date: "June 20, 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# TITLE: Using Shiny To Explain Simpson's Paradox
+
+### What is Simpson's Paradox
+
+Every Simpson's paradox involves at least three variables:
+
++ the explained
++ the observed explanatory
++ the lurking explanatory
+  If the effect of the observed explanatory variable on the explained variable changes directions when you account for the lurking explanatory variable, you've got a Simpson's         Paradox.
+    
+
+### Effect that is shown here uses the concept of Bias seen during Admissions at the University of California , Berkley in 1973 
+
+In 1973, the University of California-Berkeley was sued for sex discrimination. The numbers looked pretty incriminating: the graduate schools had just accepted 44% of male applicants but only 35% of female applicants. But By Properly Pooling the admissions , by breaking them down into each department , it was seen that The trend was reversed in some cases . 
+
+
+## User Knowledge To be Noted / Notes
+
+The Explaination and the representation is Trivial and novice approach, and used very simple Widgets to explain the effect of Simpson's Paradox . 
+  
+*I will be trying to improve on this effort with more verions in the future*
+
+- Use of Two Slider inputs , which gives inputs to the graphs 
+  + The top Slider being for the input to the easy department 
+  + The bottom Slider being the input to the difficult department
+  + There are two Graphs on the top Row, that are reactive to the input sliders 
+    + The left bar graph represents the change % of Male and Female admits in the easy department with variance of the easy department input slider
+    + The right bar graph represents the change % of Male and Female admits in the Hard department with variance of the Hard department input slider
+  + The final Bar graph in Green that is the combined bar plot, we see that , the combined plot varies as such: 
+    - **If % Male admitted (easy/Hard) > % Male admitted (easy/Hard) then % Male admitited [Combined (easy+Hard)] can be less than % FeMale admitited [Combined (easy+Hard)]**
+    - **If % Male admitted (easy/Hard) < % Male admitted (easy/Hard) then % Male admitited [Combined (easy+Hard)] can be greater than % FeMale admitited [Combined (easy+Hard)]**   
+    
+    
+    
+    
