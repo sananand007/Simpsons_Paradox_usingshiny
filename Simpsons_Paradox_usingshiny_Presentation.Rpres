@@ -1,0 +1,81 @@
+Simpsons Paradox using Shiny
+========================================================
+author: Sandeep Anand
+date: 6/20/2017
+autosize: true
+
+First Slide
+========================================================
+
+For more details on the Simpsons Paradox, please check the link below
+<https://sananand007.shinyapps.io/simpsonsparadox/> .
+
+Every Simpson's paradox involves at least three variables:
+
++ the explained
++ the observed explanatory
++ the lurking explanatory
+  If the effect of the observed explanatory variable on the explained variable changes directions when you account for the lurking explanatory variable, you've got a Simpson's Paradox.
++ The Simpson's Paradox is an idea that can explain and find faults in a number of data analysis by proper pooling of the data which can challenge reproducibility  
+
+Second Slide
+========================================================
+
+For more details on the shiny app, please check the link below
+<https://sananand007.shinyapps.io/simpsonsparadox/> .
+
+- It shows the widgets being used to develop the Shiny app that is later shown as a Picture
+- It also shows reactivity of graphs through the use of variable bar Plots
+- It also shows how we can implement a rough version of Simpson's Paradox basic idea using a simple way
+
+Code to Show the Data being Used
+========================================================
+
+```{r Code to Show the Data Used, echo=FALSE, warnings=FALSE}
+data(UCBAdmissions)
+      dimnames(UCBAdmissions)
+      
+      admindata <- data.frame(UCBAdmissions)
+      
+      aggdata <- setNames(aggregate(admindata$Freq, list(admindata$Admit,admindata$Dept), sum), c("Decision", "Group","Count"))
+      
+      grade <- c()
+      
+      
+      # New data frame to categorize Easy or Hard
+      dept.id<-c(unique(as.character(aggdata$Group)))
+      
+      for (i in seq(1,length(aggdata$Decision),2)){
+        if(as.character(aggdata$Group[i]) == as.character(dept.id[as.integer(i/2+1)])) {
+          if(as.integer(aggdata$Count[i]) > as.integer(aggdata$Count[i+1])) {
+            grade[as.integer(i/2+1)] <- "Easy"
+          } else if (as.integer(aggdata$Count[i] <= as.character(aggdata$Count[i+1]))) {
+            grade[as.integer(
+              i/2+1)] <- "Hard"
+          }
+        }
+      }
+      
+      newgrade.df <- cbind.data.frame(dept.id,grade)
+      newgrade.df$grade <- as.factor(newgrade.df$grade)
+      
+      # Making Final Data frame with only easy and hard departments
+      lev <- with(admindata, levels(admindata$Dept))
+      lev[lev == as.character(newgrade.df$dept.id)] <- as.character(newgrade.df$grade)
+      admindata.mod <- within(admindata, levels(admindata$Dept)<-lev)
+      drop<-c("Admit", "Gender", "Dept", "Freq")
+      admindata.mod.clean <- admindata.mod[,!(names(admindata.mod) %in% drop)]
+      
+      # Collapse them 
+      aggdata2 <- setNames(aggregate(admindata.mod.clean$Freq, list(admindata.mod.clean$Admit, admindata.mod.clean$Gender, admindata.mod.clean$Dept), sum),
+                           c("Decision", "Gender", "Category", "Count"))
+      
+      aggdata2
+```
+
+Slide With Plot
+========================================================
+
+```{r, echo=FALSE}
+knitr::include_graphics('./Capture-Output.png')
+```

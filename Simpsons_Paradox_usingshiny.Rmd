@@ -11,6 +11,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # TITLE: Using Shiny To Explain Simpson's Paradox
 
+## Link to the App: https://sananand007.shinyapps.io/simpsonsparadox/
+
 ### What is Simpson's Paradox
 
 Every Simpson's paradox involves at least three variables:

@@ -16,6 +16,20 @@ library(gridExtra)
 ui <- fluidPage(
   titlePanel("Explaining the Simpson's Paradox using Shiny"),
   
+  h1("Short Documentation"),
+  
+  p(strong("
+        Use of Two Slider inputs , which gives inputs to the graphs The top Slider being for the input to the easy department 
+        The bottom Slider being the input to the difficult department
+        There are two Graphs on the top Row, that are reactive to the input sliders 
+        The left bar graph represents the change % of Male and Female admits in the easy department with variance of the easy department input slider
+        The right bar graph represents the change % of Male and Female admits in the Hard department with variance of the Hard department input slider.")),
+        
+  p(strong("The final Bar graph in Green that is the combined bar plot, we see that , the combined plot varies as such: 
+        If % Male admitted (easy/Hard) > % Male admitted (easy/Hard) then % Male admitited [Combined (easy+Hard)] can be less than % FeMale admitited [Combined (easy+Hard)]
+        If % Male admitted (easy/Hard) < % Male admitted (easy/Hard) then % Male admitited [Combined (easy+Hard)] can be greater than % FeMale admitited [Combined (easy+Hard)]   
+       ")),
+  
   sidebarLayout(position = "left",
                 sidebarPanel(
                   sliderInput("percentEInput","% Applied to the Easy Department",min=1, max=100, value = runif(1)*100),
@@ -174,6 +188,7 @@ server<-function(input, output)
   output$Decision <- renderText(
     {
       paste("Simpson's Paradox")
+      
     }
   )
   
